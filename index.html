@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Calculator</title>
+    <link rel="icon" href="ico.png" type="image/x-icon" />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #515151;
+      }
+      .container {
+        max-width: 400px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #ffffff75;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        border-radius: 5px;
+        text-align: center;
+      }
+      input[type="button"] {
+        background-color: #6fff74a0;
+        color: #000000;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        border-radius: 5px;
+        cursor: pointer;
+        margin: 5px;
+      }
+      input[type="button"]:hover {
+        background-color: #4cb14fa0;
+      }
+      input[type="button"]:active {
+        background-color: #307132a0;
+      }
+
+      input[type="text"] {
+        padding: 5px;
+        font-size: 16px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        width: 100%;
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Calculator</h1>
+      <input type="text" id="result" placeholder="0" readonly />
+      <div>
+        <input type="button" value="1" onclick="insertNumber('1')" />
+        <input type="button" value="2" onclick="insertNumber('2')" />
+        <input type="button" value="3" onclick="insertNumber('3')" />
+        <input type="button" value="+" onclick="insertOperator('+')" />
+      </div>
+      <div>
+        <input type="button" value="4" onclick="insertNumber('4')" />
+        <input type="button" value="5" onclick="insertNumber('5')" />
+        <input type="button" value="6" onclick="insertNumber('6')" />
+        <input type="button" value="-" onclick="insertOperator('-')" />
+      </div>
+      <div>
+        <input type="button" value="7" onclick="insertNumber('7')" />
+        <input type="button" value="8" onclick="insertNumber('8')" />
+        <input type="button" value="9" onclick="insertNumber('9')" />
+        <input type="button" value="*" onclick="insertOperator('*')" />
+      </div>
+      <div>
+        <input type="button" value="C" onclick="clearResult()" />
+        <input type="button" value="0" onclick="insertNumber('0')" />
+        <input type="button" value="=" onclick="calculateResult()" />
+        <input type="button" value="/" onclick="insertOperator('/')" />
+      </div>
+    </div>
+    <script>
+      let result = document.getElementById("result");
+      let operator = null;
+      let value1 = null;
+
+      function insertNumber(num) {
+        if (result.value == "0") {
+          result.value = num;
+        } else {
+          result.value += num;
+        }
+      }
+
+      function insertOperator(op) {
+        operator = op;
+        value1 = Number(result.value);
+        result.value = "0";
+      }
+
+      function calculateResult() {
+        let value2 = Number(result.value);
+        let resultValue = null;
+        switch (operator) {
+          case "+":
+            resultValue = value1 + value2;
+            break;
+          case "-":
+            resultValue = value1 - value2;
+            break;
+          case "*":
+            resultValue = value1 * value2;
+            break;
+          case "/":
+            resultValue = value1 / value2;
+            break;
+        }
+        result.value = resultValue;
+        operator = null;
+        value1 = null;
+      }
+
+      function clearResult() {
+        result.value = "0";
+        operator = null;
+        value1 = null;
+      }
+
+      function bubbleSort(arr) {
+        let len = arr.length;
+        for (let i = 0; i < len; i++) {
+          for (let j = 0; j < len - 1; j++) {
+            if (arr[j] > arr[j + 1]) {
+              let temp = arr[j];
+              arr[j] = arr[j + 1];
+              arr[j + 1] = temp;
+            }
+          }
+        }
+        console.log(arr);
+      }
+    </script>
+  </body>
+</html>
